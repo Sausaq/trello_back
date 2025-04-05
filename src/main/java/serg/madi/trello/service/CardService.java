@@ -9,8 +9,6 @@ import serg.madi.trello.repository.BoardColumnRepository;
 
 import java.util.List;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class CardService {
@@ -24,6 +22,21 @@ public class CardService {
     public Card createCard(Integer columnId, Card card) {
         BoardColumn column = columnRepository.findById(columnId).orElseThrow();
         card.setColumn(column);
+        return cardRepository.save(card);
+    }
+
+    public Card getCard(Integer cardId) {
+        return cardRepository.findById(cardId).orElseThrow(() -> new RuntimeException("Card not found"));
+    }
+
+    public void deleteCard(Integer cardId) {
+        cardRepository.deleteById(cardId);
+    }
+
+    public Card updateCard(Integer cardId, Card updatedCard) {
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> new RuntimeException("Card not found"));
+        card.setTitle(updatedCard.getTitle());
+        card.setDescription(updatedCard.getDescription());
         return cardRepository.save(card);
     }
 

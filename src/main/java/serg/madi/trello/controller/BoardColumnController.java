@@ -22,5 +22,16 @@ public class BoardColumnController {
     public BoardColumn createColumn(@PathVariable Integer boardId, @RequestBody BoardColumn column) {
         return columnService.createColumn(boardId, column);
     }
+
+    @PatchMapping("/{columnId}")
+    public BoardColumn updateColumn(@PathVariable Integer columnId, @RequestBody BoardColumn column) {
+        return columnService.updateColumn(columnId, column);
+    }
+
+    @DeleteMapping("/{columnId}")
+    public void deleteColumn(@PathVariable Integer columnId) {
+        columnService.deleteColumn(columnId);
+    }
+
 }
 

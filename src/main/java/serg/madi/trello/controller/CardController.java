@@ -23,6 +23,21 @@ public class CardController {
         return cardService.createCard(columnId, card);
     }
 
+    @GetMapping("/{cardId}")
+    public Card getCard(@PathVariable Integer cardId) {
+        return cardService.getCard(cardId);
+    }
+
+    @DeleteMapping("/{cardId}")
+    public void deleteCard(@PathVariable Integer cardId) {
+        cardService.deleteCard(cardId);
+    }
+
+    @PatchMapping("/{cardId}")
+    public Card updateCard(@PathVariable Integer cardId, @RequestBody Card updatedCard) {
+        return cardService.updateCard(cardId, updatedCard);
+    }
+
     @PutMapping("/{cardId}/move/{newColumnId}")
     public void moveCard(@PathVariable Integer cardId, @PathVariable Integer newColumnId) {
         cardService.moveCard(cardId, newColumnId);

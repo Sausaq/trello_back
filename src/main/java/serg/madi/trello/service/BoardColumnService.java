@@ -13,6 +13,7 @@ import java.util.List;
 public class BoardColumnService {
     private final BoardColumnRepository columnRepository;
     private final BoardRepository boardRepository;
+    private final BoardColumnRepository boardColumnRepository;
 
     public List<BoardColumn> getColumnsByBoard(Integer boardId) {
         return columnRepository.findByBoardId(boardId);
@@ -22,5 +23,16 @@ public class BoardColumnService {
         Board board = boardRepository.findById(boardId).orElseThrow();
         column.setBoard(board);
         return columnRepository.save(column);
+    }
+
+    public BoardColumn updateColumn(Integer boardId, BoardColumn column) {
+        BoardColumn existColumn = boardColumnRepository.findById(boardId).orElseThrow();
+        existColumn.setTitle(column.getTitle());
+        existColumn.setDescription(column.getDescription());
+        return columnRepository.save(existColumn);
+    }
+
+    public void deleteColumn(Integer columnId) {
+        boardColumnRepository.deleteById(columnId);
     }
 }

@@ -28,5 +28,11 @@ public class BoardService {
     public void deleteBoard(Integer boardId) {
         boardRepository.deleteById(boardId);
     }
+
+    public Board updateBoard(Integer boardId, Board updatedBoard) {
+        Board existingBoard = getBoardById(boardId);
+        existingBoard.setTitle(updatedBoard.getTitle());
+        return boardRepository.save(existingBoard);
+    }
 }
 

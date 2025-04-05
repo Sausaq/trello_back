@@ -28,6 +28,11 @@ public class BoardController {
         return boardService.createBoard(board);
     }
 
+    @PatchMapping("/{id}")
+    public Board updateBoard(@PathVariable Integer id, @RequestBody Board board) {
+        return boardService.updateBoard(id, board);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteBoard(@PathVariable Integer id) {
         boardService.deleteBoard(id);
