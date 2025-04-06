@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
         // Разрешаем запросы с фронтенда (например, на localhost:3000)
         registry.addMapping("/api/**")  // Разрешить все запросы на пути /api/*
                 .allowedOrigins("*")  // Разрешаем только с этого источника
-                .allowedMethods("GET", "POST", "PUT", "DELETE")  // Разрешаем только эти методы
+                .allowedMethods("GET", "PATCH", "POST", "PUT", "DELETE")  // Разрешаем только эти методы
                 .allowedHeaders("*");  // Разрешаем все заголовки
     }
 }

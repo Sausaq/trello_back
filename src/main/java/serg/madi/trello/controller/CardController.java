@@ -2,6 +2,7 @@ package serg.madi.trello.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import serg.madi.trello.dto.CardRequest;
 import serg.madi.trello.entity.Card;
 import serg.madi.trello.service.CardService;
 
@@ -19,8 +20,8 @@ public class CardController {
     }
 
     @PostMapping
-    public Card createCard(@PathVariable Integer columnId, @RequestBody Card card) {
-        return cardService.createCard(columnId, card);
+    public Card createCard(@RequestBody CardRequest card) {
+        return cardService.createCard(card);
     }
 
     @GetMapping("/{cardId}")
@@ -34,11 +35,11 @@ public class CardController {
     }
 
     @PatchMapping("/{cardId}")
-    public Card updateCard(@PathVariable Integer cardId, @RequestBody Card updatedCard) {
+    public Card updateCard(@PathVariable Integer cardId, @RequestBody CardRequest updatedCard) {
         return cardService.updateCard(cardId, updatedCard);
     }
 
-    @PutMapping("/{cardId}/move/{newColumnId}")
+    @PatchMapping("/{cardId}/move/{newColumnId}")
     public void moveCard(@PathVariable Integer cardId, @PathVariable Integer newColumnId) {
         cardService.moveCard(cardId, newColumnId);
     }

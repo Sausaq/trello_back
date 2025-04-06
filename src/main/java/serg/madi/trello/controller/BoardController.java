@@ -2,6 +2,7 @@ package serg.madi.trello.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import serg.madi.trello.dto.BoardRequest;
 import serg.madi.trello.entity.Board;
 import serg.madi.trello.service.BoardService;
 
@@ -24,12 +25,12 @@ public class BoardController {
     }
 
     @PostMapping
-    public Board createBoard(@RequestBody Board board) {
+    public Board createBoard(@RequestBody BoardRequest board) {
         return boardService.createBoard(board);
     }
 
     @PatchMapping("/{id}")
-    public Board updateBoard(@PathVariable Integer id, @RequestBody Board board) {
+    public Board updateBoard(@PathVariable Integer id, @RequestBody BoardRequest board) {
         return boardService.updateBoard(id, board);
     }
 

@@ -1,6 +1,7 @@
 package serg.madi.trello.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import serg.madi.trello.dto.BoardColumnRequest;
 import serg.madi.trello.entity.Board;
 import serg.madi.trello.entity.BoardColumn;
 import serg.madi.trello.repository.BoardColumnRepository;
@@ -19,16 +20,19 @@ public class BoardColumnService {
         return columnRepository.findByBoardId(boardId);
     }
 
-    public BoardColumn createColumn(Integer boardId, BoardColumn column) {
-        Board board = boardRepository.findById(boardId).orElseThrow();
-        column.setBoard(board);
-        return columnRepository.save(column);
+    public BoardColumn createColumn(BoardColumnRequest column) {
+        Board board = boardRepository.findById(column.boardId()).orElseThrow();
+        BoardColumn newColumn = new BoardColumn();
+        newColumn.setTitle(column.title());
+        newColumn.setDescription(column.description());
+        newColumn.setBoard(board);
+        return columnRepository.save(newColumn);
     }
 
-    public BoardColumn updateColumn(Integer boardId, BoardColumn column) {
+    public BoardColumn updateColumn(Integer boardId, BoardColumnRequest column) {
         BoardColumn existColumn = boardColumnRepository.findById(boardId).orElseThrow();
-        existColumn.setTitle(column.getTitle());
-        existColumn.setDescription(column.getDescription());
+        existColumn.setTitle(column.title());
+        existColumn.setDescription(column.description());
         return columnRepository.save(existColumn);
     }
 

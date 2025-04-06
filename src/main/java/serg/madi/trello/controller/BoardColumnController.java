@@ -2,6 +2,7 @@ package serg.madi.trello.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import serg.madi.trello.dto.BoardColumnRequest;
 import serg.madi.trello.entity.BoardColumn;
 import serg.madi.trello.service.BoardColumnService;
 
@@ -19,12 +20,12 @@ public class BoardColumnController {
     }
 
     @PostMapping
-    public BoardColumn createColumn(@PathVariable Integer boardId, @RequestBody BoardColumn column) {
-        return columnService.createColumn(boardId, column);
+    public BoardColumn createColumn(@RequestBody BoardColumnRequest column) {
+        return columnService.createColumn(column);
     }
 
     @PatchMapping("/{columnId}")
-    public BoardColumn updateColumn(@PathVariable Integer columnId, @RequestBody BoardColumn column) {
+    public BoardColumn updateColumn(@PathVariable Integer columnId, @RequestBody BoardColumnRequest column) {
         return columnService.updateColumn(columnId, column);
     }
 

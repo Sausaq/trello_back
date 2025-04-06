@@ -2,6 +2,7 @@ package serg.madi.trello.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import serg.madi.trello.dto.CardRequest;
 import serg.madi.trello.entity.Card;
 import serg.madi.trello.entity.BoardColumn;
 import serg.madi.trello.repository.CardRepository;
@@ -19,10 +20,13 @@ public class CardService {
         return cardRepository.findByColumnId(columnId);
     }
 
-    public Card createCard(Integer columnId, Card card) {
-        BoardColumn column = columnRepository.findById(columnId).orElseThrow();
-        card.setColumn(column);
-        return cardRepository.save(card);
+    public Card createCard(CardRequest card) {
+        BoardColumn column = columnRepository.findById(card.columnId()).orElseThrow(() -> new RuntimeException("Column not found"));
+        Card newCard = new Card();
+        newCard.setTitle(card.title());
+        newCard.setDescription(card.description());
+        newCard.setColumn(column);
+        return cardRepository.save(newCard);
     }
 
     public Card getCard(Integer cardId) {
@@ -33,10 +37,10 @@ public class CardService {
         cardRepository.deleteById(cardId);
     }
 
-    public Card updateCard(Integer cardId, Card updatedCard) {
+    public Card updateCard(Integer cardId, CardRequest updatedCard) {
         Card card = cardRepository.findById(cardId).orElseThrow(() -> new RuntimeException("Card not found"));
-        card.setTitle(updatedCard.getTitle());
-        card.setDescription(updatedCard.getDescription());
+        card.setTitle(updatedCard.title());
+        card.setDescription(updatedCard.description());
         return cardRepository.save(card);
     }
 

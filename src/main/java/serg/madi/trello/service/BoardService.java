@@ -2,6 +2,7 @@ package serg.madi.trello.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import serg.madi.trello.dto.BoardRequest;
 import serg.madi.trello.entity.Board;
 import serg.madi.trello.repository.BoardRepository;
 
@@ -21,17 +22,19 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Board createBoard(Board board) {
-        return boardRepository.save(board);
+    public Board createBoard(BoardRequest board) {
+        Board newBoard = new Board();
+        newBoard.setTitle(board.title());
+        return boardRepository.save(newBoard);
     }
 
     public void deleteBoard(Integer boardId) {
         boardRepository.deleteById(boardId);
     }
 
-    public Board updateBoard(Integer boardId, Board updatedBoard) {
+    public Board updateBoard(Integer boardId, BoardRequest updatedBoard) {
         Board existingBoard = getBoardById(boardId);
-        existingBoard.setTitle(updatedBoard.getTitle());
+        existingBoard.setTitle(updatedBoard.title());
         return boardRepository.save(existingBoard);
     }
 }

@@ -2,6 +2,8 @@ package serg.madi.trello.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "column_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private BoardColumn column;
 
     @Override
