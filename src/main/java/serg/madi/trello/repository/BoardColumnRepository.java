@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface BoardColumnRepository extends JpaRepository<BoardColumn, Integer> {
-    List<BoardColumn> findByBoardId(Integer boardId);
+    List<BoardColumn> findByBoardIdOrderByIdAsc(Integer boardId);
+
 }

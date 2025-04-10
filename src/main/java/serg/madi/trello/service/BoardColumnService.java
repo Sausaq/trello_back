@@ -17,7 +17,7 @@ public class BoardColumnService {
     private final BoardColumnRepository boardColumnRepository;
 
     public List<BoardColumn> getColumnsByBoard(Integer boardId) {
-        return columnRepository.findByBoardId(boardId);
+        return columnRepository.findByBoardIdOrderByIdAsc(boardId);
     }
 
     public BoardColumn createColumn(BoardColumnRequest column) {

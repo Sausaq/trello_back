@@ -9,20 +9,10 @@ import serg.madi.trello.service.CardService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/columns/{columnId}/cards")
+@RequestMapping("/api/cards")
 @RequiredArgsConstructor
 public class CardController {
     private final CardService cardService;
-
-    @GetMapping
-    public List<Card> getCards(@PathVariable Integer columnId) {
-        return cardService.getCardsByColumn(columnId);
-    }
-
-    @PostMapping
-    public Card createCard(@RequestBody CardRequest card) {
-        return cardService.createCard(card);
-    }
 
     @GetMapping("/{cardId}")
     public Card getCard(@PathVariable Integer cardId) {

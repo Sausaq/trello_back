@@ -2,8 +2,11 @@ package serg.madi.trello.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import serg.madi.trello.dto.BoardColumnRequest;
 import serg.madi.trello.dto.BoardRequest;
 import serg.madi.trello.entity.Board;
+import serg.madi.trello.entity.BoardColumn;
+import serg.madi.trello.service.BoardColumnService;
 import serg.madi.trello.service.BoardService;
 
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+    private final BoardColumnService columnService;
 
     @GetMapping("/{id}")
     public Board getBoard(@PathVariable Integer id) {
@@ -38,4 +42,15 @@ public class BoardController {
     public void deleteBoard(@PathVariable Integer id) {
         boardService.deleteBoard(id);
     }
+
+    @GetMapping("/{boardId}/columns")
+    public List<BoardColumn> getColumns(@PathVariable Integer boardId) {
+        return columnService.getColumnsByBoard(boardId);
+    }
+
+    @PostMapping("/{boardId}/columns")
+    public BoardColumn createColumn(@RequestBody BoardColumnRequest column) {
+        return columnService.createColumn(column);
+    }
+
 }

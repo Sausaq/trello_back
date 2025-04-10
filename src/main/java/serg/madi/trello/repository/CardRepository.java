@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, Integer> {
-    List<Card> findByColumnId(Integer columnId);
+    List<Card> findByColumnIdOrderByIdAsc(Integer columnId);
+
 }
+

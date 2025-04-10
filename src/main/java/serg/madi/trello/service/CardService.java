@@ -17,7 +17,7 @@ public class CardService {
     private final BoardColumnRepository columnRepository;
 
     public List<Card> getCardsByColumn(Integer columnId) {
-        return cardRepository.findByColumnId(columnId);
+        return cardRepository.findByColumnIdOrderByIdAsc(columnId);
     }
 
     public Card createCard(CardRequest card) {
