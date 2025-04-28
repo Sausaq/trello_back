@@ -18,6 +18,8 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardColumnService columnService;
 
+
+
     @GetMapping("/{id}")
     public Board getBoard(@PathVariable Integer id) {
         return boardService.getBoardById(id);
@@ -26,6 +28,11 @@ public class BoardController {
     @GetMapping
     public List<Board> getBoards() {
         return boardService.getAllBoards();
+    }
+
+    @GetMapping("/userId")
+    public List<Board> getBoardsByUserId(@RequestParam Integer userId) {
+        return boardService.getAllBoardsByUserId(userId);
     }
 
     @PostMapping

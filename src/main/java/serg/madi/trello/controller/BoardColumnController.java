@@ -39,5 +39,9 @@ public class BoardColumnController {
         return cardService.createCard(card);
     }
 
+    @PatchMapping("/{columnId}/move/{newOrder}")
+    public void moveColumn(@PathVariable Integer columnId, @PathVariable Integer newOrder){
+        columnService.moveColumn(columnId, newOrder);
+    }
 }
 

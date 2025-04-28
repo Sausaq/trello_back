@@ -20,6 +20,7 @@ public class BoardColumn {
     private Integer id;
     private String title;
     private String description;
+    private Integer orderNumber;
 
     @ManyToOne
     @JoinColumn(name = "board_id", nullable = false)

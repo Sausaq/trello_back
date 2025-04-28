@@ -6,8 +6,6 @@ import serg.madi.trello.dto.CardRequest;
 import serg.madi.trello.entity.Card;
 import serg.madi.trello.service.CardService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/cards")
 @RequiredArgsConstructor

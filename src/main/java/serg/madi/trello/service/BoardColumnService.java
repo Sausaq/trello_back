@@ -17,7 +17,7 @@ public class BoardColumnService {
     private final BoardColumnRepository boardColumnRepository;
 
     public List<BoardColumn> getColumnsByBoard(Integer boardId) {
-        return columnRepository.findByBoardIdOrderByIdAsc(boardId);
+        return columnRepository.findByBoardIdOrderByOrderNumberAsc(boardId);
     }
 
     public BoardColumn createColumn(BoardColumnRequest column) {
@@ -38,5 +38,11 @@ public class BoardColumnService {
 
     public void deleteColumn(Integer columnId) {
         boardColumnRepository.deleteById(columnId);
+    }
+
+    public void moveColumn(Integer columnId, Integer newOrder) {
+        BoardColumn column = columnRepository.findById(columnId).orElseThrow();
+        column.setOrderNumber(newOrder);
+        columnRepository.save(column);
     }
 }
